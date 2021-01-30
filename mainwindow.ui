@@ -43,7 +43,32 @@
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionCopy"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionPaste"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Format</string>
+    </property>
+    <addaction name="actionWord_Wrap"/>
+    <addaction name="actionFont"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp_2">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionRepository"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
+   <addaction name="menuHelp_2"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -75,6 +100,59 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionRepository">
+   <property name="text">
+    <string>Repository</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="text">
+    <string>Cut</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionWord_Wrap">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Word Wrap</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="text">
+    <string>Font</string>
    </property>
   </action>
  </widget>
