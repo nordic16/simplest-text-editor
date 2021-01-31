@@ -6,6 +6,7 @@
 #include <QIODevice>
 #include <QClipboard>
 #include <QFontDialog>
+#include <QDesktopServices>
 
 void WriteToFile(QString& path, const QString &content);
 QString ReadFromFile(QString& path);
@@ -127,6 +128,13 @@ void MainWindow::on_actionAbout_triggered()
 {
     About* about = new About();
     about->show();
+}
+
+/// Opens github repo.
+void MainWindow::on_actionRepository_triggered()
+{
+    // This opens the repo link with the user-defined default browser.
+    QDesktopServices::openUrl(QUrl("https://github.com/nordic16/simplest-text-editor"));
 }
 
 ////</events>
