@@ -3,14 +3,13 @@
 #include <QFileDialog>
 #include <QIODevice>
 #include <QClipboard>
-#include <QMessageBox>
+#include <QFontDialog>
 
 void WriteToFile(QString& path, const QString &content);
 QString ReadFromFile(QString& path);
-void UpdateClipboard(const QString& text);
+void UpdateClipboard(const QString& str);
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -112,6 +111,14 @@ void MainWindow::on_actionWord_Wrap_triggered()
         ui->TextBox->setLineWrapMode(QTextEdit::NoWrap);
     }
 }
+
+/// Sets TextBox font.
+void MainWindow::on_actionFont_triggered()
+{
+    // Directly sets the font used by TextBox.
+    // If the user clicks on cancel, the default font is used.
+    ui->TextBox->setFont(QFontDialog::getFont(0, ui->TextBox->font()));
+}
 ////</events>
 
 
@@ -143,8 +150,9 @@ QString ReadFromFile(QString& path)
     return val;
 }
 
-void UpdateClipboard(const QString& text) {
+// Sets the clipboard text to str.
+void UpdateClipboard(const QString& str) {
     QClipboard* clipboard = QGuiApplication::clipboard();
-    clipboard->setText(text);
+    clipboard->setText(str);
 }
 ////</Helper functions>

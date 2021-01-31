@@ -34,6 +34,8 @@ private slots:
 
     void on_actionWord_Wrap_triggered();
 
+    void on_actionFont_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
