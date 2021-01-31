@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "about.h"
+
 #include <QFileDialog>
 #include <QIODevice>
 #include <QClipboard>
@@ -119,6 +121,14 @@ void MainWindow::on_actionFont_triggered()
     // If the user clicks on cancel, the default font is used.
     ui->TextBox->setFont(QFontDialog::getFont(0, ui->TextBox->font()));
 }
+
+/// Displays the About form.
+void MainWindow::on_actionAbout_triggered()
+{
+    About* about = new About();
+    about->show();
+}
+
 ////</events>
 
 
