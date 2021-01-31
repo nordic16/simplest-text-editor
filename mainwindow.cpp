@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
-#include <QDebug>
 #include <QIODevice>
 #include <QClipboard>
 
@@ -45,6 +44,10 @@ void MainWindow::on_actionSave_triggered()
 
     WriteToFile(path, ui->TextBox->toPlainText());
     this->FPATH = path;
+
+    // Gets the last portion of the string separated by a '\' (the file name).
+    QString fname = path.section("/", -1);
+    this->setWindowTitle(fname.append(" - Simple Text Editor"));
 }
 
 /// Saves content to a new file regardless of path being empty or not.
@@ -52,6 +55,10 @@ void MainWindow::on_actionSave_As_triggered()
 {
     QString path = QFileDialog::getSaveFileName(this, "Save File", "file", "Text files(*.txt)");
     WriteToFile(path, ui->TextBox->toPlainText());
+
+    // Gets the last portion of the string separated by a '\' (the file name).
+    QString fname = path.section("/", -1);
+    this->setWindowTitle(fname.append(" - Simple Text Editor"));
 }
 
 /// Opens a new file, copying its content to TextBox.
