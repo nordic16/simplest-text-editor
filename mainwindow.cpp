@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QIODevice>
 #include <QClipboard>
+#include <QMessageBox>
 
 void WriteToFile(QString& path, const QString &content);
 QString ReadFromFile(QString& path);
@@ -98,6 +99,18 @@ void MainWindow::on_actionPaste_triggered()
 {
     QClipboard* board = QGuiApplication::clipboard();
     ui->TextBox->setText(board->text());
+}
+
+/// Word wrapping.
+void MainWindow::on_actionWord_Wrap_triggered()
+{
+    // In case actionWord_Wrap is checked, word wrap is enabled
+    if (ui->actionWord_Wrap->isChecked()) {
+        ui->TextBox->setLineWrapMode(QTextEdit::WidgetWidth);
+
+    } else {
+        ui->TextBox->setLineWrapMode(QTextEdit::NoWrap);
+    }
 }
 ////</events>
 

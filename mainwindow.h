@@ -32,6 +32,8 @@ private slots:
 
     void on_actionPaste_triggered();
 
+    void on_actionWord_Wrap_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
