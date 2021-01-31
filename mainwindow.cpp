@@ -136,7 +136,6 @@ void MainWindow::on_actionRepository_triggered()
     // This opens the repo link with the user-defined default browser.
     QDesktopServices::openUrl(QUrl("https://github.com/nordic16/simplest-text-editor"));
 }
-
 ////</events>
 
 
