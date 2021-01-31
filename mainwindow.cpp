@@ -1,12 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QMessageBox>
 #include <QFileDialog>
 #include <QDebug>
 #include <QIODevice>
+#include <QClipboard>
 
 void WriteToFile(QString& path, const QString &content);
 QString ReadFromFile(QString& path);
+void UpdateClipboard(const QString& text);
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -46,13 +47,14 @@ void MainWindow::on_actionSave_triggered()
     this->FPATH = path;
 }
 
+/// Saves content to a new file regardless of path being empty or not.
 void MainWindow::on_actionSave_As_triggered()
 {
     QString path = QFileDialog::getSaveFileName(this, "Save File", "file", "Text files(*.txt)");
     WriteToFile(path, ui->TextBox->toPlainText());
 }
 
-
+/// Opens a new file, copying its content to TextBox.
 void MainWindow::on_actionOpen_triggered()
 {
     // If the user clicks on cancel, a null string is returned.
@@ -68,6 +70,27 @@ void MainWindow::on_actionOpen_triggered()
     QString lines = ReadFromFile(this->FPATH);
 
     ui->TextBox->setText(lines);
+}
+
+/// Copies the content of TextBox to the clipboard.
+void MainWindow::on_actionCopy_triggered()
+{
+    UpdateClipboard(ui->TextBox->toPlainText());
+}
+
+/// Copies the content of TextBox to the clipboard.
+/// Clearing the TextBox.
+void MainWindow::on_actionCut_triggered()
+{
+    UpdateClipboard(ui->TextBox->toPlainText());
+    ui->TextBox->setText("");
+}
+
+/// Pastes the content of the clipboard to TextBox.
+void MainWindow::on_actionPaste_triggered()
+{
+    QClipboard* board = QGuiApplication::clipboard();
+    ui->TextBox->setText(board->text());
 }
 ////</events>
 
@@ -98,5 +121,10 @@ QString ReadFromFile(QString& path)
     }
 
     return val;
+}
+
+void UpdateClipboard(const QString& text) {
+    QClipboard* clipboard = QGuiApplication::clipboard();
+    clipboard->setText(text);
 }
 ////</Helper functions>
