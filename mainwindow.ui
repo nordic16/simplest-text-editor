@@ -30,7 +30,7 @@
      </layout>
     </item>
     <item row="0" column="0">
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="FindInTextbox">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -41,7 +41,7 @@
        <bool>true</bool>
       </property>
       <property name="placeholderText">
-       <string/>
+       <string>Find...</string>
       </property>
       <property name="clearButtonEnabled">
        <bool>false</bool>
@@ -76,6 +76,8 @@
     <addaction name="actionCopy"/>
     <addaction name="actionCut"/>
     <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="actionFind"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -179,6 +181,14 @@
   <action name="actionNew">
    <property name="text">
     <string>New</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="text">
+    <string>Find</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
    </property>
   </action>
  </widget>

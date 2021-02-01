@@ -8,6 +8,9 @@
 #include <QFontDialog>
 #include <QDesktopServices>
 
+//Debug
+#include <QMessageBox>
+
 void WriteToFile(QString& path, const QString &content);
 QString ReadFromFile(QString& path);
 void UpdateClipboard(const QString& str);
@@ -16,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->FindInTextbox->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -143,6 +147,13 @@ void MainWindow::on_actionRepository_triggered()
     // This opens the repo link with the user-defined default browser.
     QDesktopServices::openUrl(QUrl("https://github.com/nordic16/simplest-text-editor"));
 }
+
+/// Find text in the letter.
+void MainWindow::on_actionFind_triggered()
+{
+    bool visible = !ui->FindInTextbox->isVisible();
+    ui->FindInTextbox->setVisible(visible);
+}
 ////</events>
 
 
@@ -180,3 +191,28 @@ void UpdateClipboard(const QString& str) {
     clipboard->setText(str);
 }
 ////</Helper functions>
+
+void MainWindow::on_FindInTextbox_textChanged(const QString& text)
+{
+
+    if (!ui->FindInTextbox->text().isEmpty())
+    {
+        // Moves the cursor the start of the textbox. Critical.
+        ui->TextBox->moveCursor(QTextCursor::Start);
+
+
+        while (ui->TextBox->find(text))
+        {
+            QTextCursor cursor(ui->TextBox->document());
+            int pos = cursor.position() + text.length();
+
+            QTextCharFormat format;
+            format.setBackground(Qt::yellow);
+
+            cursor.setPosition(pos, QTextCursor::KeepAnchor);
+
+
+            qDebug() << cursor.selectedText();
+            cursor.setCharFormat(format);
+        }
+}

@@ -40,6 +40,10 @@ private slots:
 
     void on_actionRepository_triggered();
 
+    void on_actionFind_triggered();
+
+    void on_FindInTextbox_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 };
