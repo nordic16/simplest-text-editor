@@ -200,19 +200,53 @@ void MainWindow::on_FindInTextbox_textChanged(const QString& text)
         // Moves the cursor the start of the textbox. Critical.
         ui->TextBox->moveCursor(QTextCursor::Start);
 
+        QTextCharFormat defaultFmt = ui->TextBox->currentCharFormat();
+
+
+        // The QTextEdit::ExtraSelection structure provides a way of specifying a character format for a given selection in a document.
+        QVector<QTextEdit::ExtraSelection> extraSelections;
 
         while (ui->TextBox->find(text))
         {
+
+            /*
             QTextCursor cursor(ui->TextBox->document());
+
             int pos = cursor.position() + text.length();
 
             QTextCharFormat format;
-            format.setBackground(Qt::yellow);
+            format.setBackground(Qt::red);
 
             cursor.setPosition(pos, QTextCursor::KeepAnchor);
 
+            qDebug() << "Text: " << cursor.selectedText();
 
-            qDebug() << cursor.selectedText();
+            cursor.setCharFormat(defaultFmt);
             cursor.setCharFormat(format);
+            */
+
+
+            QTextCursor cursor(ui->TextBox->document());
+
+            // Fixes the cursor positioning.
+            cursor.setPosition(cursor.position() + 1, QTextCursor::KeepAnchor);
+
+            // Takes care of the theming.
+            QTextEdit::ExtraSelection extra;
+            extra.format.setBackground(Qt::red);
+
+            extra.cursor = ui->TextBox->textCursor();
+
+            extraSelections.append(extra);
         }
+
+        ui->TextBox->setExtraSelections(extraSelections);
+
+    } else {
+        // A temporary fix.
+        QString text = ui->TextBox->toPlainText();
+
+        ui->TextBox->clear();
+        ui->TextBox->setText(text);
+    }
 }
